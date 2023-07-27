@@ -75,6 +75,11 @@ require('packer').startup(function(use)
 	}
 
 	use 'nvim-treesitter/nvim-treesitter-context'
+
+	-- use {
+	-- 	"SmiteshP/nvim-navic",
+	-- 	requires = "neovim/nvim-lspconfig"
+	-- }
 end)
 
 
@@ -123,12 +128,6 @@ require("nvim-tree").setup {
 }
 vim.keymap.set("n", "<leader>ft", ":NvimTreeToggle<CR>", { silent = true })
 
--- lualine
-require('lualine').setup {
-	options = {
-		theme = "base16"
-	}
-}
 
 
 -- treesitter
@@ -177,6 +176,8 @@ lsp.setup()
 -- theme
 require("onedark").load()
 
+-- lualine
+require('lualine').setup()
 
 -- highlight yanked text for 200ms using the "Visual" highlight group
 vim.cmd [[
@@ -200,3 +201,10 @@ require 'treesitter-context'.setup {
 	zindex = 20,    -- The Z-index of the context window
 	on_attach = nil, -- (fun(buf: integer): boolean) return false to disable attaching
 }
+
+-- local navic = require("nvim-navic")
+-- require("lspconfig").clangd.setup {
+-- 	on_attach = function(client, bufnr)
+-- 		navic.attach(client, bufnr)
+-- 	end
+-- }
