@@ -44,6 +44,19 @@ require('packer').startup(function(use)
 
 	use 'nvim-tree/nvim-tree.lua'
 	use 'nvim-tree/nvim-web-devicons'
+
+	use {
+		"ahmedkhalf/project.nvim",
+		config = function()
+			require("project_nvim").setup {
+				-- your configuration comes here
+				-- or leave it empty to use the default settings
+				-- refer to the configuration section below
+			}
+		end
+	}
+
+	use 'crispgm/nvim-tabline'
 end)
 
 
@@ -56,7 +69,7 @@ vim.opt.shiftwidth = 2
 vim.opt.clipboard = 'unnamedplus'
 vim.opt.termguicolors = true
 vim.opt.autoindent = true
-vim.opt.mouse = "" -- disable mouse
+vim.opt.mouse = "n" -- disable mouse
 vim.g.mapleader = " "
 
 
@@ -65,6 +78,8 @@ vim.keymap.set("n", "{", "{zz")
 vim.keymap.set("n", "}", "}zz")
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
+
+
 -- telescrop keybindings
 local builtin = require("telescope.builtin")
 vim.keymap.set("n", "<leader>ff", builtin.find_files, {})
@@ -88,9 +103,7 @@ require("nvim-tree").setup {
 	on_attach = my_on_attach,
 	---
 }
-
--- nvim-tree
-require("nvim-tree").setup()
+vim.keymap.set("n", "<leader>ft", ":NvimTreeToggle<CR>", { silent = true })
 
 -- lualine
 require('lualine').setup()
@@ -102,6 +115,17 @@ require 'nvim-treesitter.configs'.setup {
 		enable = true
 	}
 }
+
+
+require('tabline').setup({
+	show_index = true,      -- show tab index
+	show_modify = true,     -- show buffer modification indicator
+	show_icon = true,       -- show file extension icon
+	modify_indicator = '*', -- modify indicator
+	no_name = 'untitled',   -- no name buffer name
+	brackets = { '[', ']' }, -- file name brackets surrounding
+})
+vim.keymap.set("n", "<tab>", ":tabnext<CR>", { silent = true })
 
 
 -- lsp config
@@ -130,3 +154,12 @@ lsp.setup()
 
 -- theme
 require("onedark").load()
+
+
+-- highlight yanked text for 200ms using the "Visual" highlight group
+vim.cmd [[
+augroup highlight_yank
+autocmd!
+au TextYankPost * silent! lua vim.highlight.on_yank({higroup="Visual", timeout=200})
+augroup END
+]]
