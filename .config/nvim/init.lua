@@ -11,6 +11,7 @@ require('packer').startup(function(use)
 
 	-- Theme inspired by Atom
 	use "navarasu/onedark.nvim"
+	use "RRethy/nvim-base16"
 
 	-- comments and stuff
 	use 'tpope/vim-commentary'
@@ -57,6 +58,23 @@ require('packer').startup(function(use)
 	}
 
 	use 'crispgm/nvim-tabline'
+	use({
+		"kylechui/nvim-surround",
+		tag = "*", -- Use for stability; omit to use `main` branch for the latest features
+		config = function()
+			require("nvim-surround").setup({
+				-- Configuration here, or leave empty to use defaults
+			})
+		end
+	})
+
+	use { 'anuvyklack/pretty-fold.nvim',
+		config = function()
+			require('pretty-fold').setup()
+		end
+	}
+
+	use 'nvim-treesitter/nvim-treesitter-context'
 end)
 
 
@@ -106,7 +124,11 @@ require("nvim-tree").setup {
 vim.keymap.set("n", "<leader>ft", ":NvimTreeToggle<CR>", { silent = true })
 
 -- lualine
-require('lualine').setup()
+require('lualine').setup {
+	options = {
+		theme = "base16"
+	}
+}
 
 
 -- treesitter
@@ -115,7 +137,6 @@ require 'nvim-treesitter.configs'.setup {
 		enable = true
 	}
 }
-
 
 require('tabline').setup({
 	show_index = true,      -- show tab index
@@ -126,6 +147,7 @@ require('tabline').setup({
 	brackets = { '[', ']' }, -- file name brackets surrounding
 })
 vim.keymap.set("n", "<tab>", ":tabnext<CR>", { silent = true })
+vim.keymap.set("n", "<C-n>", ":tabnew<CR>", { silent = true })
 
 
 -- lsp config
@@ -163,3 +185,18 @@ autocmd!
 au TextYankPost * silent! lua vim.highlight.on_yank({higroup="Visual", timeout=200})
 augroup END
 ]]
+
+require 'treesitter-context'.setup {
+	enable = true,           -- Enable this plugin (Can be enabled/disabled later via commands)
+	max_lines = 0,           -- How many lines the window should span. Values <= 0 mean no limit.
+	min_window_height = 0,   -- Minimum editor window height to enable context. Values <= 0 mean no limit.
+	line_numbers = true,
+	multiline_threshold = 20, -- Maximum number of lines to collapse for a single context line
+	trim_scope = 'outer',    -- Which context lines to discard if `max_lines` is exceeded. Choices: 'inner', 'outer'
+	mode = 'cursor',         -- Line used to calculate context. Choices: 'cursor', 'topline'
+	-- Separator between context and content. Should be a single character string, like '-'.
+	-- When separator is set, the context will only show up when there are at least 2 lines above cursorline.
+	separator = nil,
+	zindex = 20,    -- The Z-index of the context window
+	on_attach = nil, -- (fun(buf: integer): boolean) return false to disable attaching
+}
