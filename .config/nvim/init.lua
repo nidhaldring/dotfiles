@@ -11,7 +11,6 @@ require('packer').startup(function(use)
 
 	-- Theme inspired by Atom
 	use "navarasu/onedark.nvim"
-	use "RRethy/nvim-base16"
 
 	-- comments and stuff
 	use 'tpope/vim-commentary'
@@ -19,6 +18,8 @@ require('packer').startup(function(use)
 
 	-- Better status line
 	use { 'nvim-lualine/lualine.nvim', requires = { 'kyazdani42/nvim-web-devicons' } }
+
+	-- Telescope
 	use { 'nvim-telescope/telescope.nvim', tag = '0.1.1', requires = { { 'nvim-lua/plenary.nvim' } } }
 
 	-- lsp
@@ -58,6 +59,7 @@ require('packer').startup(function(use)
 	}
 
 	use 'crispgm/nvim-tabline'
+
 	use({
 		"kylechui/nvim-surround",
 		tag = "*", -- Use for stability; omit to use `main` branch for the latest features
@@ -76,10 +78,8 @@ require('packer').startup(function(use)
 
 	use 'nvim-treesitter/nvim-treesitter-context'
 
-	-- use {
-	-- 	"SmiteshP/nvim-navic",
-	-- 	requires = "neovim/nvim-lspconfig"
-	-- }
+	use 'mbbill/undotree'
+	use 'folke/twilight.nvim'
 end)
 
 
@@ -92,18 +92,41 @@ vim.opt.shiftwidth = 2
 vim.opt.clipboard = 'unnamedplus'
 vim.opt.termguicolors = true
 vim.opt.autoindent = true
-vim.opt.mouse = "n" -- disable mouse
 vim.g.mapleader = " "
-
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
+vim.opt.undodir = os.getenv("HOME") .. "/.undo/nvim"
+vim.opt.undofile = true
+vim.opt.swapfile = false
+vim.opt.backup = false
+vim.opt.scrolloff = 8
 
 -- keybindings
 vim.keymap.set("n", "{", "{zz")
 vim.keymap.set("n", "}", "}zz")
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
+vim.keymap.set("n", "<leader>d", "\"_d")
+vim.keymap.set("v", "<leader>d", "\"_d")
+vim.keymap.set("n", "x", "\"_x")
+vim.keymap.set("v", "x", "\"_x")
+vim.keymap.set("n", "X", "\"_X")
+vim.keymap.set("v", "X", "\"_X")
 
 
--- telescrop keybindings
+-- telescope configs
+require("telescope").setup {
+	pickers = {
+		find_files = {
+			theme = "dropdown"
+		},
+		live_grep = {
+			theme = "dropdown"
+		}
+	}
+}
+
+-- telescope keybindings
 local builtin = require("telescope.builtin")
 vim.keymap.set("n", "<leader>ff", builtin.find_files, {})
 vim.keymap.set("n", "<leader>lg", builtin.live_grep, {})
@@ -124,6 +147,13 @@ end
 require("nvim-tree").setup {
 	---
 	on_attach = my_on_attach,
+	filters = {
+		dotfiles = false,
+	},
+	git = {
+		enable = true,
+		ignore = false,
+	}
 	---
 }
 vim.keymap.set("n", "<leader>ft", ":NvimTreeToggle<CR>", { silent = true })
@@ -160,7 +190,6 @@ lsp.on_attach(function(client, bufnr)
 end)
 vim.cmd [[autocmd BufWritePre <buffer> lua vim.lsp.buf.format()]]
 
-
 -- autocompletion keybindings
 -- You need to setup `cmp` after lsp-zero
 local cmp = require('cmp')
@@ -175,6 +204,10 @@ lsp.setup()
 
 -- theme
 require("onedark").load()
+-- the lines below makes vim transparent
+-- i didn't like the look that's why they're commented out for now
+-- vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+-- vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
 
 -- lualine
 require('lualine').setup()
@@ -202,9 +235,4 @@ require 'treesitter-context'.setup {
 	on_attach = nil, -- (fun(buf: integer): boolean) return false to disable attaching
 }
 
--- local navic = require("nvim-navic")
--- require("lspconfig").clangd.setup {
--- 	on_attach = function(client, bufnr)
--- 		navic.attach(client, bufnr)
--- 	end
--- }
+vim.keymap.set('n', '<leader>ut', vim.cmd.UndotreeToggle)
