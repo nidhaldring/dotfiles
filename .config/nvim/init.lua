@@ -76,10 +76,7 @@ require('packer').startup(function(use)
 		end
 	}
 
-	use 'nvim-treesitter/nvim-treesitter-context'
-
 	use 'mbbill/undotree'
-	use 'folke/twilight.nvim'
 end)
 
 
@@ -100,6 +97,8 @@ vim.opt.undofile = true
 vim.opt.swapfile = false
 vim.opt.backup = false
 vim.opt.scrolloff = 8
+-- remove status bar cuz we use airline
+vim.opt.showmode = false
 
 -- keybindings
 vim.keymap.set("n", "{", "{zz")
@@ -108,10 +107,10 @@ vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
 vim.keymap.set("n", "<leader>d", "\"_d")
 vim.keymap.set("v", "<leader>d", "\"_d")
-vim.keymap.set("n", "x", "\"_x")
-vim.keymap.set("v", "x", "\"_x")
-vim.keymap.set("n", "X", "\"_X")
-vim.keymap.set("v", "X", "\"_X")
+vim.keymap.set("n", "c", "\"_c")
+vim.keymap.set("v", "c", "\"_c")
+vim.keymap.set("n", "C", "\"_C")
+vim.keymap.set("v", "C", "\"_C")
 
 
 -- telescope configs
