@@ -9,6 +9,8 @@ require('packer').startup(function(use)
 		run = ':TSUpdate'
 	}
 
+	use 'nvim-treesitter/nvim-treesitter-context'
+
 	-- Theme inspired by Atom
 	use "navarasu/onedark.nvim"
 

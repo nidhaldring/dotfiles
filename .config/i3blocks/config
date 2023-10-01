@@ -1,0 +1,23 @@
+align=center
+color=#f8f8f2
+separator_block_width=15
+markup=pango
+
+[sound]
+command=~/.config/i3blocks/scripts/sound.sh
+interval=once
+signal=9
+
+[brightness]
+command=~/.config/i3blocks/scripts/brightness.sh
+interval=5
+
+[battery]
+command=~/.config/i3blocks/scripts/battery.sh
+interval=once
+signal=10
+
+[time]
+command=date +%T
+interval=1
+

@@ -101,6 +101,7 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias vim="nvim"
+alias :q="exit"
 
 
 # Configure zsh-vi-mode
@@ -108,3 +109,10 @@ alias vim="nvim"
 ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
 
 fpath+=${ZDOTDIR:-~}/.zsh_functions
+
+export PATH=$PATH:/usr/local/go/bin
+
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
