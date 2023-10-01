@@ -3,6 +3,11 @@ color=#f8f8f2
 separator_block_width=15
 markup=pango
 
+
+[player]
+command=~/.config/i3blocks/scripts/player.sh
+interval=5
+
 [sound]
 command=~/.config/i3blocks/scripts/sound.sh
 interval=once
