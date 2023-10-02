@@ -15,12 +15,12 @@ signal=9
 
 [brightness]
 command=~/.config/i3blocks/scripts/brightness.sh
-interval=5
+interval=once
+signal=10
 
 [battery]
 command=~/.config/i3blocks/scripts/battery.sh
-interval=once
-signal=5
+interval=5
 
 [time]
 command=date +"%d-%m-%y %T"

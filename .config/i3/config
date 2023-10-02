@@ -40,8 +40,8 @@ bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ to
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && pkill -RTMIN+9 i3blocks
 
 # Control brightness
-bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl s +5% && pkill -RTMIN+9 i3blocks
-bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl s 5%- && pkill -RTMIN+9 i3blocks
+bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl s +5% && pkill -RTMIN+10 i3blocks
+bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl s 5%- && pkill -RTMIN+10 i3blocks
 
 # Start firefox
 bindsym $mod+b exec google-chrome
