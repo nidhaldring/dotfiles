@@ -229,5 +229,5 @@ exec --no-statup-id google-chrome
 exec --no-statup-id alacritty
 exec --no-statup-id obsidian
 
-exec --no-startup-id feh --randomize --bg-scale ~/bg-imgs
+exec --no-startup-id ~/.config/i3/scripts/bg.sh
 bindsym $mod+shift+x exec betterlockscreen -l dim
