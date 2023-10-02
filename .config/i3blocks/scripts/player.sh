@@ -5,4 +5,3 @@ status=$(spotifycli --playbackstatus)
 [ -n "$BLOCK_BUTTON" ] && spotifycli --playpause
 
 echo $status $song 
-
