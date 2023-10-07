@@ -100,7 +100,8 @@ bindsym $mod+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking
-bindsym $mod+z layout tabbed
+# i don't think i ever need this
+# bindsym $mod+z layout tabbed
 bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
@@ -223,6 +224,8 @@ bar {
 }
 
 gaps inner 5
+bindsym $mod+z		gaps outer current plus 5
+bindsym $mod+Shift+z	gaps outer current minus 5
 
 # startup programs
 exec --no-startup-id google-chrome
