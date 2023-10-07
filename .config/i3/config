@@ -225,9 +225,18 @@ bar {
 gaps inner 5
 
 # startup programs
-exec --no-statup-id google-chrome
-exec --no-statup-id alacritty
-exec --no-statup-id obsidian
+exec --no-startup-id google-chrome
+exec --no-startup-id alacritty
+exec --no-startup-id picom
 
 exec --no-startup-id ~/.config/i3/scripts/bg.sh
 bindsym $mod+shift+x exec betterlockscreen -l dim
+
+for_window [window_role="pop-up"] floating enable
+for_window [window_role="pop-up"] border normal
+
+# Make the currently focused window a scratchpad
+bindsym $mod+Shift+minus move scratchpad
+
+# Show the first scratchpad window
+bindsym $mod+plus scratchpad show

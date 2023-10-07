@@ -79,6 +79,7 @@ require('packer').startup(function(use)
 	}
 
 	use 'mbbill/undotree'
+	use 'xiyaowong/transparent.nvim'
 end)
 
 
