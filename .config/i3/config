@@ -43,16 +43,16 @@ bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOU
 bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl s +5% && pkill -RTMIN+10 i3blocks
 bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl s 5%- && pkill -RTMIN+10 i3blocks
 
-# Start firefox
-bindsym $mod+b exec google-chrome
+# Start Brave
+bindsym $mod+b exec --no-startup-id brave-browser
 
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
-bindsym $mod+t exec i3-sensible-terminal
+bindsym $mod+Return exec --no-startup-id i3-sensible-terminal
+bindsym $mod+t exec --no-startup-id i3-sensible-terminal
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -66,10 +66,10 @@ bindsym $mod+d exec --no-startup-id dmenu_run
 # bindcode $mod+40 exec --no-startup-id i3-dmenu-desktop
 
 # change focus
-bindsym $mod+j focus left
-bindsym $mod+k focus down
-bindsym $mod+l focus up
-bindsym $mod+m focus right
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+bindsym $mod+m focus left
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
@@ -78,10 +78,10 @@ bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
 # move focused window
-bindsym $mod+Shift+j move left
-bindsym $mod+Shift+k move down
-bindsym $mod+Shift+l move up
-bindsym $mod+Shift+m move right
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+bindsym $mod+Shift+h move left
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
@@ -119,14 +119,14 @@ bindsym $mod+q focus parent
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
 set $ws1 "1:web"
-set $ws2 "2:code"
-set $ws3 "3:terminal"
-set $ws4 "4:obsdian"
-set $ws5 "5:music"
-set $ws6 "6"
-set $ws7 "7"
+set $ws2 "2:terminal"
+set $ws3 "3:code"
+set $ws4 "4"
+set $ws5 "5:obsdian"
+set $ws6 "6:music"
+set $ws7 "7:books"
 set $ws8 "8"
-set $ws9 "9"
+set $ws9 "9:slack"
 set $ws10 "10"
 
 # switch to workspace
@@ -153,25 +153,14 @@ bindsym $mod+Shift+8 move container to workspace number $ws9
 bindsym $mod+Shift+9 move container to workspace number $ws9
 bindsym $mod+Shift+10 move container to workspace number $ws10
 
-# move focused container to workspace
-# bindsym $mod+Shift+KP_1 move container to workspace number $ws1
-# bindsym $mod+Shift+KP_2 move container to workspace number $ws2
-# bindsym $mod+Shift+KP_3 move container to workspace number $ws3
-# bindsym $mod+Shift+KP_4 move container to workspace number $ws4
-# bindsym $mod+Shift+KP_5 move container to workspace number $ws5
-# bindsym $mod+Shift+KP_6 move container to workspace number $ws6
-# bindsym $mod+Shift+KP_7 move container to workspace number $ws7
-# bindsym $mod+Shift+KP_8 move container to workspace number $ws9
-# bindsym $mod+Shift+KP_9 move container to workspace number $ws9
-# bindsym $mod+Shift+KP_0 move container to workspace number $ws10
-
 # Always open some programs on specified workspace
-assign [class="^Google-chrome"]          $ws1
-assign [class="^Code"]          $ws2
-assign [class="^Alacritty"]       $ws3
-assign [class="^obsidian"]          $ws4
-assign [class="^Spotify"]          $ws5
-
+assign  [class="^Brave-browser"]  $ws1
+# assign  [class="^Alacritty"]      $ws2
+assign  [class="^Code"]           $ws3
+assign  [class="^obsidian"]       $ws5
+assign  [class="^Spotify"]        $ws6
+assign  [class="^Zathura"]        $ws7
+assign  [class="^Slack"]          $ws9
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -193,6 +182,12 @@ mode "resize" {
         bindsym Up resize shrink height 10 px or 10 ppt
         bindsym Right resize grow width 10 px or 10 ppt
 
+        bindsym h resize shrink width 10 px or 10 ppt
+        bindsym j resize shrink height 10 px or 10 ppt
+        bindsym k resize grow height 10 px or 10 ppt
+        bindsym l resize grow width 10 px or 10 ppt
+
+
         # back to normal: Enter or Escape or $mod+r
         bindsym Return mode "default"
         bindsym Escape mode "default"
@@ -213,6 +208,7 @@ client.background       #F8F8F2
 default_border none
 for_window [class=".*"] border none
 smart_borders on
+smart_gaps on
 bindsym $mod+Tab workspace next
 
 
@@ -228,14 +224,19 @@ bindsym $mod+z		gaps outer current plus 5
 bindsym $mod+Shift+z	gaps outer current minus 5
 
 # startup programs
-exec --no-startup-id google-chrome
-exec --no-startup-id alacritty
+exec --no-startup-id brave-browser
+exec --no-startup-id i3-msg '1:web; exec /usr/local/bin/alacritty'
+# picom is a compositor, i'm using it to show transparent terminal
 exec --no-startup-id picom
 
+# script to set bg
 exec --no-startup-id ~/.config/i3/scripts/bg.sh
+# lockscreen
 bindsym $mod+shift+x exec betterlockscreen -l dim
 
+# Enable float for some windows
 for_window [window_role="pop-up"] floating enable
+for_window [class="^Pavucontrol$"]  floating enable
 for_window [window_role="pop-up"] border normal
 
 # Make the currently focused window a scratchpad
@@ -243,3 +244,6 @@ bindsym $mod+Shift+minus move scratchpad
 
 # Show the first scratchpad window
 bindsym $mod+plus scratchpad show
+
+# Multi monitor setttings
+# force_xinerama yes
