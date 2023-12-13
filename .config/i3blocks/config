@@ -23,6 +23,6 @@ command=~/.config/i3blocks/scripts/battery.sh
 interval=5
 
 [time]
-command=date +"%m %a %Y %T"
+command=date +"%d %b %A %Y %T"
 interval=1
 
