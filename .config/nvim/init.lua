@@ -22,7 +22,7 @@ require('packer').startup(function(use)
 	use { 'nvim-lualine/lualine.nvim', requires = { 'kyazdani42/nvim-web-devicons' } }
 
 	-- Telescope
-	use { 'nvim-telescope/telescope.nvim', tag = '0.1.1', requires = { { 'nvim-lua/plenary.nvim' } } }
+	use { 'nvim-telescope/telescope.nvim', tag = '0.1.4', requires = { { 'nvim-lua/plenary.nvim' } } }
 
 	-- lsp
 	use {
@@ -84,6 +84,7 @@ end)
 
 
 vim.opt.relativenumber = true
+vim.opt.number = true
 vim.opt.hlsearch = false
 vim.opt.incsearch = true
 vim.opt.wrap = true
@@ -190,7 +191,7 @@ lsp.on_attach(function(client, bufnr)
 	vim.keymap.set("n", "gh", function() vim.lsp.buf.hover() end, { buffer = bufnr, remap = false })
 	vim.keymap.set("n", "<leader>;", "<cmd> lua vim.diagnostic.open_float()<CR>", { buffer = bufnr, remap = false })
 end)
-vim.cmd [[autocmd BufWritePre <buffer> lua vim.lsp.buf.format()]]
+-- vim.cmd [[autocmd BufWritePre <buffer> lua vim.lsp.buf.format()]]
 
 -- autocompletion keybindings
 -- You need to setup `cmp` after lsp-zero
