@@ -71,7 +71,7 @@ ZSH_THEME="fino-time"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-vi-mode)
+plugins=(git fzf-zsh-plugin zsh-vi-mode)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -101,7 +101,10 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias vim="nvim"
+alias v="nvim"
 alias :q="exit"
+alias stremio="flatpak run com.stremio.Stremio &"
+export EDITOR='nvim'
 
 
 # Configure zsh-vi-mode
@@ -116,3 +119,17 @@ export PATH=$PATH:/usr/local/go/bin
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+function my_super_duper_fzf_thingy() {
+  fzf_output=$({ fdfind .  ~/Desktop/personal ~/Desktop/perla ~/Desktop/alwasaet ~/.config/nvim ~/.config/i3; echo ~/.zshrc } | fzf)
+  [[ -z $fzf_output ]] || vim $fzf_output
+}
+zle -N my_super_duper_fzf_thingy{,}
+
+# Define an init function and append to zvm_after_init_commands
+function my_init() {
+  [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+  bindkey '^e' my_super_duper_fzf_thingy
+}
+zvm_after_init_commands+=(my_init)
+
