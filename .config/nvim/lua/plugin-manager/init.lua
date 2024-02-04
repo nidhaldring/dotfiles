@@ -8,9 +8,6 @@ require("packer").startup(function(use)
 		run = ":TSUpdate",
 	})
 
-	use("nvim-treesitter/nvim-treesitter-context")
-
-	-- Theme inspired by Atom
 	use("navarasu/onedark.nvim")
 
 	-- comments and stuff
@@ -62,9 +59,7 @@ require("packer").startup(function(use)
 		"kylechui/nvim-surround",
 		tag = "*", -- Use for stability; omit to use `main` branch for the latest features
 		config = function()
-			require("nvim-surround").setup({
-				-- Configuration here, or leave empty to use defaults
-			})
+			require("nvim-surround").setup({})
 		end,
 	})
 
@@ -81,4 +76,8 @@ require("packer").startup(function(use)
 	use("lukas-reineke/indent-blankline.nvim")
 
 	use("nvimtools/none-ls.nvim")
+
+	use("folke/neodev.nvim")
+
+	use("tpope/vim-fugitive")
 end)

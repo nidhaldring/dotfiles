@@ -15,6 +15,10 @@ lsp.on_attach(function(client, bufnr)
 	vim.keymap.set("n", "<leader>ca", function()
 		vim.lsp.buf.code_action()
 	end, { buffer = bufnr, remap = false })
+
+	vim.keymap.set("n", "<leader>rf", function()
+		vim.lsp.buf.references()
+	end, { buffer = bufnr, remap = false })
 end)
 -- vim.cmd [[autocmd BufWritePre <buffer> lua vim.lsp.buf.format()]]
 

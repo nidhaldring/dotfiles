@@ -11,6 +11,7 @@ vim.opt.ignorecase = true
 vim.opt.smartcase = true
 
 vim.opt.smartindent = true
+vim.opt.expandtab = true
 
 vim.opt.wrap = true
 vim.opt.tabstop = 2
@@ -37,7 +38,7 @@ vim.o.foldcolumn = "0" -- '0' is not bad
 vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
 vim.o.foldlevelstart = 99
 vim.o.foldenable = true
-vim.opt.colorcolumn = "80"
+vim.opt.colorcolumn = "100"
 
 -- highlight yanked text for 200ms using the "Visual" highlight group
 vim.cmd([[
@@ -52,6 +53,3 @@ vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
 vim.g.skip_ts_context_commentstring_module = true
-
--- format on save
-vim.cmd([[autocmd BufWritePre * lua vim.lsp.buf.format()]])

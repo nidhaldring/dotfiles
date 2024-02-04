@@ -27,3 +27,11 @@ local builtin = require("telescope.builtin")
 map("n", "<C-p>", builtin.find_files, {})
 map("n", "<leader>ff", builtin.find_files, {})
 map("n", "<leader>lg", builtin.live_grep, {})
+
+-- format
+map("n", "<leader>fm", function()
+	vim.lsp.buf.format()
+end)
+
+-- format only selected parts
+map("v", "<leader>fm", vim.lsp.buf.format)

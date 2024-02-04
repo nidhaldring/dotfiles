@@ -1,5 +1,6 @@
 require("plugins.telescope")
 require("plugins.theme")
+require("plugins.neodev")
 require("plugins.lsp")
 require("plugins.lualine")
 require("plugins.treesitter")

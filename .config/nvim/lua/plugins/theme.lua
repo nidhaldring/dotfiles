@@ -1,5 +1,2 @@
--- theme
-require('onedark').setup {
-    style = 'darker'
-}
+-- Lua
 require("onedark").load()
