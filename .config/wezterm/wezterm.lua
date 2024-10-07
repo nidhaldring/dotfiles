@@ -1,6 +1,29 @@
 local wezterm = require("wezterm")
 local act = wezterm.action
 
+-- add zoom indicator to tab once it's zoomed
+wezterm.on("update-status", function(window, pane)
+	local active_tab = pane:tab()
+	local is_zoomed = false
+	if active_tab ~= nil then
+		for _, pane_attributes in pairs(active_tab:panes_with_info()) do
+			is_zoomed = (pane_attributes["is_zoomed"] and #active_tab:panes() > 1) or is_zoomed
+			if is_zoomed then
+				break
+			end
+		end
+	end
+
+	if is_zoomed then
+		window:set_right_status(wezterm.format({
+			{ Foreground = { Color = "yellow" } },
+			{ Text = "[Z] " },
+		}))
+	else
+		window:set_right_status("")
+	end
+end)
+
 return {
 	-- check_for_updates = true,
 	term = "xterm-256color",
@@ -9,17 +32,19 @@ return {
 	-- debug info for key presses
 	debug_key_events = false,
 
+	color_scheme = "Oxocarbon Dark (Gogh)",
+
 	window_decorations = "RESIZE",
 
 	inactive_pane_hsb = {
 		saturation = 0.9,
-		brightness = 0.7,
+		brightness = 0.9,
 	},
 
 	use_fancy_tab_bar = false,
 
 	font = wezterm.font("Fira Code"),
-	font_size = 14.0,
+	font_size = 14.5,
 
 	-- make cursor white
 	colors = {
@@ -29,9 +54,8 @@ return {
 	leader = { key = "b", mods = "CTRL", timeout_milliseconds = 1000 },
 	keys = {
 		-- Tab management
-		-- this supposed to move win in tmux
-		{ key = "p", mods = "LEADER", action = act.ActivateTabRelative(1) },
-		{ key = "n", mods = "LEADER", action = act.ActivateTabRelative(-1) },
+		{ key = "p", mods = "LEADER", action = act.ActivateTabRelative(-1) },
+		{ key = "n", mods = "LEADER", action = act.ActivateTabRelative(1) },
 		{ key = "b", mods = "LEADER", action = act.ActivateLastTab },
 		{
 			key = ",",
@@ -47,7 +71,11 @@ return {
 		},
 
 		-- Window management
-		{ key = '"', mods = "LEADER", action = act({ SplitVertical = { domain = "CurrentPaneDomain" } }) },
+		{
+			key = '"',
+			mods = "LEADER",
+			action = act({ SplitVertical = { domain = "CurrentPaneDomain" } }),
+		},
 		{ key = "%", mods = "LEADER|SHIFT", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
 		{ key = "z", mods = "LEADER", action = "TogglePaneZoomState" },
 		{ key = "c", mods = "LEADER", action = act({ SpawnTab = "CurrentPaneDomain" }) },
@@ -80,7 +108,6 @@ return {
 	},
 
 	key_tables = {
-		-- added new shortcuts to the end
 		copy_mode = {
 			{ key = "c", mods = "CTRL", action = act.CopyMode("Close") },
 			{ key = "g", mods = "CTRL", action = act.CopyMode("Close") },
