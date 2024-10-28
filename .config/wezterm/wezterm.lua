@@ -76,6 +76,8 @@ return {
 			mods = "LEADER",
 			action = act({ SplitVertical = { domain = "CurrentPaneDomain" } }),
 		},
+		{ key = "}", mods = "LEADER", action = act.RotatePanes("CounterClockwise") },
+		{ key = "{", mods = "LEADER", action = act.RotatePanes("CounterClockwise") },
 		{ key = "%", mods = "LEADER|SHIFT", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
 		{ key = "z", mods = "LEADER", action = "TogglePaneZoomState" },
 		{ key = "c", mods = "LEADER", action = act({ SpawnTab = "CurrentPaneDomain" }) },
