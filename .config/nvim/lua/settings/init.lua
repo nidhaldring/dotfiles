@@ -38,7 +38,10 @@ vim.o.foldcolumn = "0" -- '0' is not bad
 vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
 vim.o.foldlevelstart = 99
 vim.o.foldenable = true
-vim.opt.colorcolumn = "100"
+vim.opt.cursorline = true
+-- vim.opt.colorcolumn = "100"
+
+vim.opt.splitright = true
 
 -- highlight yanked text for 200ms using the "Visual" highlight group
 vim.cmd([[
@@ -48,8 +51,11 @@ au TextYankPost * silent! lua vim.highlight.on_yank({higroup="Visual", timeout=2
 augroup END
 ]])
 
--- disable netrw
+-- -- disable netrw
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
 vim.g.skip_ts_context_commentstring_module = true
+
+
+vim.g.c_syntax_for_h = 1

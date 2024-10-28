@@ -6,7 +6,7 @@ require("telescope").setup {
 			hidden = true
 		},
 		live_grep = {
-			theme = "dropdown",
+			-- theme = "dropdown",
 			hidden = true
 		}
 	},

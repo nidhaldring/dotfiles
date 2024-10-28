@@ -9,6 +9,7 @@ require("packer").startup(function(use)
 	})
 
 	use("navarasu/onedark.nvim")
+	-- use("folke/tokyonight.nvim")
 
 	-- comments and stuff
 	use("tpope/vim-commentary")
@@ -67,7 +68,7 @@ require("packer").startup(function(use)
 
 	use({ "kevinhwang91/nvim-ufo", requires = "kevinhwang91/promise-async" })
 
-	use("nvim-tree/nvim-tree.lua")
+	use("stevearc/oil.nvim")
 
 	use("windwp/nvim-autopairs")
 
@@ -80,4 +81,10 @@ require("packer").startup(function(use)
 	use("folke/neodev.nvim")
 
 	use("tpope/vim-fugitive")
+
+	use("windwp/nvim-ts-autotag")
+
+	use("tpope/vim-dadbod")
+
+	use({ "typicode/bg.nvim" }) -- sync terminal bg with colorscheme i'm currently using
 end)
