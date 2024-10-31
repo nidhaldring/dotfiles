@@ -76,6 +76,16 @@ return {
 			mods = "LEADER",
 			action = act({ SplitVertical = { domain = "CurrentPaneDomain" } }),
 		},
+		{
+			key = "<",
+			mods = "LEADER",
+			action = act.MoveTabRelative(-1),
+		},
+		{
+			key = ">",
+			mods = "LEADER|SHIFT",
+			action = act.MoveTabRelative(1),
+		},
 		{ key = "}", mods = "LEADER", action = act.RotatePanes("CounterClockwise") },
 		{ key = "{", mods = "LEADER", action = act.RotatePanes("CounterClockwise") },
 		{ key = "%", mods = "LEADER|SHIFT", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
