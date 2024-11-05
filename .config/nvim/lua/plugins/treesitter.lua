@@ -3,7 +3,7 @@ require("nvim-treesitter.configs").setup({
   context_commentstring = {
     enable = true,
   },
-  ensure_installed = { "c", "lua", "go", "javascript", "typescript" },
+  ensure_installed = { "c", "lua", "javascript", "typescript" },
   highlight = {
     enable = true,
   },

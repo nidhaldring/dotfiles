@@ -24,7 +24,7 @@ require("packer").startup(function(use)
 		"nvim-telescope/telescope-fzf-native.nvim",
 		run = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
 	})
-	use({ "nvim-telescope/telescope.nvim", tag = "0.1.4", requires = { { "nvim-lua/plenary.nvim" } } })
+	use({ "nvim-telescope/telescope.nvim", tag = "0.1.8", requires = { { "nvim-lua/plenary.nvim" } } })
 
 	-- lsp
 	use({
@@ -84,7 +84,13 @@ require("packer").startup(function(use)
 
 	use("windwp/nvim-ts-autotag")
 
-	use("tpope/vim-dadbod")
+	use({
+		"kristijanhusak/vim-dadbod-ui",
+		requires = {
+			"tpope/vim-dadbod",
+			{ "kristijanhusak/vim-dadbod-completion", ft = { "sql", "mysql", "postgresql" } },
+		},
+	})
 
 	use({ "typicode/bg.nvim" }) -- sync terminal bg with colorscheme i'm currently using
 end)

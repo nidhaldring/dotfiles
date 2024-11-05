@@ -30,6 +30,13 @@ cmp.setup({
 	completion = { completeopt = "menu,menuone,noinsert" },
 })
 
+cmp.setup.filetype({ "sql" }, {
+	sources = {
+		{ name = "buffer" },
+		{ name = "vim-dadbod-completion" },
+	},
+})
+
 vim.filetype.add({ extension = { templ = "templ" } })
 
 lsp.setup()
