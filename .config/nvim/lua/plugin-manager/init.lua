@@ -8,8 +8,7 @@ require("packer").startup(function(use)
 		run = ":TSUpdate",
 	})
 
-	use("navarasu/onedark.nvim")
-	-- use("folke/tokyonight.nvim")
+	use("folke/tokyonight.nvim")
 
 	-- comments and stuff
 	use("tpope/vim-commentary")
@@ -29,7 +28,7 @@ require("packer").startup(function(use)
 	-- lsp
 	use({
 		"VonHeikemen/lsp-zero.nvim",
-		branch = "v2.x",
+		branch = "v4.x",
 		requires = {
 			-- LSP Support
 			{ "neovim/nvim-lspconfig" }, -- Required
@@ -46,6 +45,8 @@ require("packer").startup(function(use)
 			{ "hrsh7th/cmp-nvim-lsp" }, -- Required
 			{ "L3MON4D3/LuaSnip" }, -- Required
 			{ "hrsh7th/cmp-nvim-lua" },
+			{ "hrsh7th/cmp-buffer" }, -- Buffer completions
+			{ "hrsh7th/cmp-path" }, -- Path completions
 		},
 	})
 

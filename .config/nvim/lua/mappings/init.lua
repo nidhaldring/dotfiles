@@ -37,8 +37,3 @@ map("v", "<leader>fm", vim.lsp.buf.format)
 
 -- git keybindings
 map("n", "<leader>gb", ":Gitsigns blame_line<CR>")
-
--- show file marks
--- this does not work or it works slow
--- @TODO: please find a way around this
--- map("n", "<leader>fm", ":marks A-Z")
