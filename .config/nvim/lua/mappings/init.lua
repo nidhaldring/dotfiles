@@ -21,8 +21,6 @@ map("v", "C", '"_C')
 map("n", "<leader><leader>", "<c-^>")
 
 -- toggle nvim-tree
--- map("n", "<leader>ft", ":NvimTreeToggle<CR>")
-map("n", "<leader>ft", ":Oil<CR>")
 map("n", "-", ":Oil<CR>")
 
 -- telescope keybindings

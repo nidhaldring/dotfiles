@@ -1,1 +1,1 @@
-require("neodev").setup({})
+require("lazydev").setup({})

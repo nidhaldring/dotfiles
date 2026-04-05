@@ -35,7 +35,7 @@ vim.opt.scrolloff = 8
 vim.opt.showmode = false
 
 vim.o.foldcolumn = "0" -- '0' is not bad
-vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
+vim.o.foldlevel = 99   -- Using ufo provider need a large value, feel free to decrease the value
 vim.o.foldlevelstart = 99
 vim.o.foldenable = true
 -- vim.opt.cursorline = true
@@ -57,5 +57,6 @@ vim.g.loaded_netrwPlugin = 1
 
 vim.g.skip_ts_context_commentstring_module = true
 
-
 vim.g.c_syntax_for_h = 1
+vim.opt.signcolumn = "yes:1" -- merge signs in 1 col
+vim.opt.numberwidth = 2      -- max width for numbers in number col

@@ -1,12 +1,17 @@
 -- telescope configs
 require("telescope").setup({
+  defaults = {
+    file_ignore_patterns = { "node_modules/", "%.git/", "%.nuxt/", "%.output/", "__pycache__/", "%.venv/", "dist/", "build/" },
+  },
   pickers = {
     find_files = {
       theme = "dropdown",
       hidden = true,
+      no_ignore = true,
     },
     live_grep = {
       hidden = true,
+      no_ignore = true,
       layout_config = {
         width = 0.9,
         preview_width = 0.6

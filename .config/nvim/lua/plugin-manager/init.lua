@@ -1,97 +1,91 @@
 require("packer").startup(function(use)
-	-- Package manager
-	use("wbthomason/packer.nvim")
+  -- Package manager
+  use("wbthomason/packer.nvim")
 
-	-- tree sitter
-	use({
-		"nvim-treesitter/nvim-treesitter",
-		run = ":TSUpdate",
-	})
+  -- tree sitter
+  use({
+    "nvim-treesitter/nvim-treesitter",
+    run = ":TSUpdate",
+  })
 
-	use("folke/tokyonight.nvim")
+  use("j-hui/fidget.nvim")
 
-	-- comments and stuff
-	use("tpope/vim-commentary")
-	-- used to change commentstring depending on cursor placement (useful when working with vuejs etc ...)
-	use("JoosepAlviste/nvim-ts-context-commentstring")
+  use("navarasu/onedark.nvim")
 
-	-- Better status line
-	use({ "nvim-lualine/lualine.nvim", requires = { "kyazdani42/nvim-web-devicons" } })
+  -- comments and stuff
+  use("tpope/vim-commentary")
+  -- used to change commentstring depending on cursor placement (useful when working with vuejs etc ...)
+  use("JoosepAlviste/nvim-ts-context-commentstring")
 
-	-- Telescope
-	use({
-		"nvim-telescope/telescope-fzf-native.nvim",
-		run = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
-	})
-	use({ "nvim-telescope/telescope.nvim", tag = "0.1.8", requires = { { "nvim-lua/plenary.nvim" } } })
+  -- Better status line
+  use({ "nvim-lualine/lualine.nvim", requires = { "kyazdani42/nvim-web-devicons" } })
 
-	-- lsp
-	use({
-		"VonHeikemen/lsp-zero.nvim",
-		branch = "v4.x",
-		requires = {
-			-- LSP Support
-			{ "neovim/nvim-lspconfig" }, -- Required
-			{
-				"williamboman/mason.nvim",
-				run = function()
-					pcall(vim.api.nvim_command, "MasonUpdate")
-				end,
-			},
-			{ "williamboman/mason-lspconfig.nvim" }, -- Optional
+  -- Telescope
+  use({
+    "nvim-telescope/telescope-fzf-native.nvim",
+    run =
+    "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
+  })
+  use({ "nvim-telescope/telescope.nvim", tag = "0.1.8", requires = { { "nvim-lua/plenary.nvim" } } })
 
-			-- Autocompletion
-			{ "hrsh7th/nvim-cmp" }, -- Required
-			{ "hrsh7th/cmp-nvim-lsp" }, -- Required
-			{ "L3MON4D3/LuaSnip" }, -- Required
-			{ "hrsh7th/cmp-nvim-lua" },
-			{ "hrsh7th/cmp-buffer" }, -- Buffer completions
-			{ "hrsh7th/cmp-path" }, -- Path completions
-		},
-	})
+  -- lsp
+  use("neovim/nvim-lspconfig")
+  use("williamboman/mason.nvim")
 
-	use({
-		"ahmedkhalf/project.nvim",
-		config = function()
-			require("project_nvim").setup({})
-		end,
-	})
+  use({ "williamboman/mason-lspconfig.nvim" })
 
-	use({
-		"kylechui/nvim-surround",
-		tag = "*", -- Use for stability; omit to use `main` branch for the latest features
-		config = function()
-			require("nvim-surround").setup({})
-		end,
-	})
+  use({ "hrsh7th/nvim-cmp" })
+  use({ "hrsh7th/cmp-nvim-lsp" })
+  use({ "L3MON4D3/LuaSnip" })
+  use({ "hrsh7th/cmp-nvim-lua" })
+  use({ "hrsh7th/cmp-buffer" })
+  use({ "hrsh7th/cmp-path" })
 
-	use("lewis6991/gitsigns.nvim")
+  use({
+    "ahmedkhalf/project.nvim",
+    config = function()
+      require("project_nvim").setup({})
+    end,
+  })
 
-	use({ "kevinhwang91/nvim-ufo", requires = "kevinhwang91/promise-async" })
+  use({
+    "kylechui/nvim-surround",
+    tag = "*", -- Use for stability; omit to use `main` branch for the latest features
+    config = function()
+      require("nvim-surround").setup({})
+    end,
+  })
 
-	use("stevearc/oil.nvim")
+  use("lewis6991/gitsigns.nvim")
 
-	use("windwp/nvim-autopairs")
+  use({ "kevinhwang91/nvim-ufo", requires = "kevinhwang91/promise-async" })
 
-	use("prisma/vim-prisma")
+  use("stevearc/oil.nvim")
 
-	use("lukas-reineke/indent-blankline.nvim")
+  use("windwp/nvim-autopairs")
 
-	use("nvimtools/none-ls.nvim")
+  use("prisma/vim-prisma")
 
-	use("folke/neodev.nvim")
+  use("lukas-reineke/indent-blankline.nvim")
 
-	use("tpope/vim-fugitive")
+  use("nvimtools/none-ls.nvim")
 
-	use("windwp/nvim-ts-autotag")
+  use("tpope/vim-fugitive")
 
-	use({
-		"kristijanhusak/vim-dadbod-ui",
-		requires = {
-			"tpope/vim-dadbod",
-			{ "kristijanhusak/vim-dadbod-completion", ft = { "sql", "mysql", "postgresql" } },
-		},
-	})
+  use("windwp/nvim-ts-autotag")
 
-	use({ "typicode/bg.nvim" }) -- sync terminal bg with colorscheme i'm currently using
+  use({
+    "kristijanhusak/vim-dadbod-ui",
+    requires = {
+      "tpope/vim-dadbod",
+      { "kristijanhusak/vim-dadbod-completion", ft = { "sql", "mysql", "postgresql" } },
+    },
+  })
+
+  use("nvimtools/none-ls-extras.nvim")
+
+  use("folke/lazydev.nvim")
+
+  -- TODO: find better alternative
+  use({ "typicode/bg.nvim" }) -- sync terminal bg with colorscheme i'm currently using
 end)
