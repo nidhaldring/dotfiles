@@ -8,5 +8,4 @@ return {
       end,
     })
   end,
-  init = function() end,
 }

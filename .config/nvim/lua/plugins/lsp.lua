@@ -15,8 +15,6 @@ return {
     "hrsh7th/nvim-cmp",
     dependencies = {
       "hrsh7th/cmp-nvim-lsp",
-      "L3MON4D3/LuaSnip",
-      "hrsh7th/cmp-nvim-lua",
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-path",
     },
@@ -26,7 +24,7 @@ return {
         sources = {
           { name = "nvim_lsp" },
           { name = "path" },
-          { name = "buffer",  keyword_length = 3 },
+          { name = "buffer",  keyword_length = 3, max_item_count = 8 },
         },
         mapping = cmp.mapping.preset.insert({
           -- select = true, forces enter to only complete if something is explicityl selected

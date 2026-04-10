@@ -1,6 +1,7 @@
 return {
   {
     "nvimtools/none-ls.nvim",
+    dependencies = { "nvimtools/none-ls-extras.nvim" },
     opts = function()
       local null_ls = require("null-ls")
       return {
@@ -17,5 +18,4 @@ return {
       }
     end,
   },
-  "nvimtools/none-ls-extras.nvim",
 }

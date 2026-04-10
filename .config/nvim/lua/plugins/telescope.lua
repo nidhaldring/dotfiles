@@ -11,31 +11,39 @@ return {
   },
   config = function()
     require("telescope").setup({
-      defaults = {
-        file_ignore_patterns = {
-          "node_modules/",
-          "%.git/",
-          "%.nuxt/",
-          "%.output/",
-          "__pycache__/",
-          "%.venv/",
-          "dist/",
-          "build/",
-        },
-      },
       pickers = {
         find_files = {
           theme = "dropdown",
           hidden = true,
-          no_ignore = true,
+          find_command = {
+            "rg", "--files", "--hidden", "--no-ignore",
+            "--glob", "!.git/**",
+            "--glob", "!node_modules/**",
+            "--glob", "!dist/**",
+            "--glob", "!build/**",
+            "--glob", "!.nuxt/**",
+            "--glob", "!.output/**",
+            "--glob", "!__pycache__/**",
+            "--glob", "!.venv/**",
+          },
         },
         live_grep = {
           layout_config = {
             width = 0.9,
             preview_width = 0.6,
           },
-          additional_args = function(opts)
-            return { "--hidden", "--no-ignore" }
+          additional_args = function()
+            return {
+              "--hidden", "--no-ignore",
+              "--glob", "!.git/**",
+              "--glob", "!node_modules/**",
+              "--glob", "!dist/**",
+              "--glob", "!build/**",
+              "--glob", "!.nuxt/**",
+              "--glob", "!.output/**",
+              "--glob", "!__pycache__/**",
+              "--glob", "!.venv/**",
+            }
           end,
         },
       },

@@ -42,6 +42,7 @@ vim.o.foldenable = true
 -- vim.opt.colorcolumn = "100"
 
 vim.opt.splitright = true
+vim.opt.timeoutlen = 300
 
 -- highlight yanked text for 200ms using the "Visual" highlight group
 vim.cmd([[
@@ -51,7 +52,6 @@ au TextYankPost * silent! lua vim.highlight.on_yank({higroup="Visual", timeout=2
 augroup END
 ]])
 
-vim.g.skip_ts_context_commentstring_module = true
 
 vim.g.c_syntax_for_h = 1
 vim.opt.signcolumn = "yes:1" -- merge signs in 1 col
