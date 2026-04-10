@@ -1,14 +1,18 @@
--- treesitter
-require("nvim-treesitter.configs").setup({
-  context_commentstring = {
-    enable = true,
-  },
-  ensure_installed = { "c", "lua", "javascript", "typescript" },
-  highlight = {
-    enable = true,
-  },
-  -- disable treesitter for large files
-  disable = function(_, bufnr)
-    return vim.api.nvim_buf_line_count(bufnr) > 50000
+return {
+  "nvim-treesitter/nvim-treesitter",
+  lazy = false,
+  build = ":TSUpdate",
+  branch = "master",
+  config = function()
+    local configs = require("nvim-treesitter.configs")
+    configs.setup({
+      ensure_installed = { "c", "lua", "javascript", "typescript", "go", "rust" },
+      highlight = {
+        enable = true,
+        disable = function(_, bufnr)
+          return vim.api.nvim_buf_line_count(bufnr) > 50000
+        end,
+      },
+    })
   end,
-})
+}

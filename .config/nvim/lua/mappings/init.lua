@@ -23,15 +23,17 @@ map("n", "<leader><leader>", "<c-^>")
 -- toggle nvim-tree
 map("n", "-", ":Oil<CR>")
 
--- telescope keybindings
-local builtin = require("telescope.builtin")
-map("n", "<C-p>", builtin.find_files, {})
-map("n", "<leader>ff", builtin.find_files, {})
-map("n", "<leader>lg", builtin.live_grep, {})
-
 -- format
 map("n", "<leader>fm", vim.lsp.buf.format)
 map("v", "<leader>fm", vim.lsp.buf.format)
 
 -- git keybindings
 map("n", "<leader>gb", ":Gitsigns blame_line<CR>")
+
+-- folding
+map("n", "zR", function()
+  require("ufo").openAllFolds()
+end)
+map("n", "zM", function()
+  require("ufo").closeAllFolds()
+end)
