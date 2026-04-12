@@ -1,7 +1,7 @@
 local wezterm = require("wezterm")
 local act = wezterm.action
 
--- add zoom indicator to tab once it's zoomed
+-- Status bar: zoom indicator, clock, hostname, and CWD
 wezterm.on("update-status", function(window, pane)
 	local active_tab = pane:tab()
 	local is_zoomed = false
@@ -14,14 +14,15 @@ wezterm.on("update-status", function(window, pane)
 		end
 	end
 
-	if is_zoomed then
-		window:set_right_status(wezterm.format({
-			{ Foreground = { Color = "yellow" } },
-			{ Text = "[Z] " },
-		}))
-	else
-		window:set_right_status("")
-	end
+	local zoom_text = is_zoomed and "[Z]  " or ""
+	window:set_right_status(wezterm.format({
+		{ Foreground = { Color = "yellow" } },
+		{ Text = zoom_text },
+		{ Foreground = { Color = "#be95ff" } },
+		{ Text = wezterm.hostname() .. "  " },
+		{ Foreground = { Color = "#78a9ff" } },
+		{ Text = wezterm.strftime("%H:%M") .. " " },
+	}))
 end)
 
 return {
@@ -50,9 +51,28 @@ return {
 	window_close_confirmation = "AlwaysPrompt",
 	hyperlink_rules = wezterm.default_hyperlink_rules(),
 
-	-- make cursor white
+	-- colors: cursor + tab bar matching Oxocarbon palette
 	colors = {
 		cursor_bg = "#ffffff",
+		tab_bar = {
+			background = "#161616",
+			active_tab = {
+				bg_color = "#262626",
+				fg_color = "#f2f4f8",
+			},
+			inactive_tab = {
+				bg_color = "#161616",
+				fg_color = "#6e6f6f",
+			},
+			inactive_tab_hover = {
+				bg_color = "#1e1e1e",
+				fg_color = "#be95ff",
+			},
+			new_tab = {
+				bg_color = "#161616",
+				fg_color = "#525252",
+			},
+		},
 	},
 
 	leader = { key = "b", mods = "CTRL", timeout_milliseconds = 1000 },
@@ -117,6 +137,9 @@ return {
 		{ key = "9", mods = "LEADER", action = act({ ActivateTab = 8 }) },
 		{ key = "x", mods = "LEADER", action = act({ CloseCurrentPane = { confirm = true } }) },
 		{ key = "r", mods = "LEADER", action = act.ReloadConfiguration },
+
+		-- Quick select (keyboard-driven copy of URLs, hashes, paths, etc.)
+		{ key = "s", mods = "LEADER", action = act.QuickSelect },
 
 		-- Activate Copy Mode
 		{ key = "[", mods = "LEADER", action = act.ActivateCopyMode },
