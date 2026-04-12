@@ -25,7 +25,7 @@ wezterm.on("update-status", function(window, pane)
 end)
 
 return {
-	-- check_for_updates = true,
+	check_for_updates = false,
 	term = "xterm-256color",
 	use_ime = false,
 
@@ -43,8 +43,12 @@ return {
 
 	use_fancy_tab_bar = false,
 
-	font = wezterm.font("Fira Code"),
+	font = wezterm.font_with_fallback({ "Fira Code", "DejaVu Sans Mono" }),
 	font_size = 14.5,
+
+	scrollback_lines = 10000,
+	window_close_confirmation = "AlwaysPrompt",
+	hyperlink_rules = wezterm.default_hyperlink_rules(),
 
 	-- make cursor white
 	colors = {
@@ -86,7 +90,7 @@ return {
 			mods = "LEADER|SHIFT",
 			action = act.MoveTabRelative(1),
 		},
-		{ key = "}", mods = "LEADER", action = act.RotatePanes("CounterClockwise") },
+		{ key = "}", mods = "LEADER", action = act.RotatePanes("Clockwise") },
 		{ key = "{", mods = "LEADER", action = act.RotatePanes("CounterClockwise") },
 		{ key = "%", mods = "LEADER|SHIFT", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
 		{ key = "z", mods = "LEADER", action = "TogglePaneZoomState" },
@@ -112,6 +116,7 @@ return {
 		{ key = "8", mods = "LEADER", action = act({ ActivateTab = 7 }) },
 		{ key = "9", mods = "LEADER", action = act({ ActivateTab = 8 }) },
 		{ key = "x", mods = "LEADER", action = act({ CloseCurrentPane = { confirm = true } }) },
+		{ key = "r", mods = "LEADER", action = act.ReloadConfiguration },
 
 		-- Activate Copy Mode
 		{ key = "[", mods = "LEADER", action = act.ActivateCopyMode },
@@ -150,31 +155,23 @@ return {
 			{ key = "Enter", mods = "NONE", action = act.CopyMode("MoveToStartOfNextLine") },
 
 			{ key = "$", mods = "NONE", action = act.CopyMode("MoveToEndOfLineContent") },
-			{ key = "$", mods = "SHIFT", action = act.CopyMode("MoveToEndOfLineContent") },
 			{ key = "^", mods = "NONE", action = act.CopyMode("MoveToStartOfLineContent") },
-			{ key = "^", mods = "SHIFT", action = act.CopyMode("MoveToStartOfLineContent") },
 			{ key = "m", mods = "ALT", action = act.CopyMode("MoveToStartOfLineContent") },
 
 			{ key = " ", mods = "NONE", action = act.CopyMode({ SetSelectionMode = "Cell" }) },
 			{ key = "v", mods = "NONE", action = act.CopyMode({ SetSelectionMode = "Cell" }) },
 			{ key = "V", mods = "NONE", action = act.CopyMode({ SetSelectionMode = "Line" }) },
-			{ key = "V", mods = "SHIFT", action = act.CopyMode({ SetSelectionMode = "Line" }) },
 			{ key = "v", mods = "CTRL", action = act.CopyMode({ SetSelectionMode = "Block" }) },
 
 			{ key = "G", mods = "NONE", action = act.CopyMode("MoveToScrollbackBottom") },
-			{ key = "G", mods = "SHIFT", action = act.CopyMode("MoveToScrollbackBottom") },
 			{ key = "g", mods = "NONE", action = act.CopyMode("MoveToScrollbackTop") },
 
 			{ key = "H", mods = "NONE", action = act.CopyMode("MoveToViewportTop") },
-			{ key = "H", mods = "SHIFT", action = act.CopyMode("MoveToViewportTop") },
 			{ key = "M", mods = "NONE", action = act.CopyMode("MoveToViewportMiddle") },
-			{ key = "M", mods = "SHIFT", action = act.CopyMode("MoveToViewportMiddle") },
 			{ key = "L", mods = "NONE", action = act.CopyMode("MoveToViewportBottom") },
-			{ key = "L", mods = "SHIFT", action = act.CopyMode("MoveToViewportBottom") },
 
 			{ key = "o", mods = "NONE", action = act.CopyMode("MoveToSelectionOtherEnd") },
 			{ key = "O", mods = "NONE", action = act.CopyMode("MoveToSelectionOtherEndHoriz") },
-			{ key = "O", mods = "SHIFT", action = act.CopyMode("MoveToSelectionOtherEndHoriz") },
 
 			{ key = "PageUp", mods = "NONE", action = act.CopyMode("PageUp") },
 			{ key = "PageDown", mods = "NONE", action = act.CopyMode("PageDown") },
