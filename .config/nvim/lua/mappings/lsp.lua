@@ -1,3 +1,6 @@
+local map = require("mappings.utils").map
+
+
 vim.api.nvim_create_autocmd("LspAttach", {
 	callback = function(ev)
 		local opts = { buffer = ev.buf }
@@ -49,3 +52,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		end, opts)
 	end,
 })
+
+-- format
+map("n", "<leader>fm", vim.lsp.buf.format)
+map("v", "<leader>fm", vim.lsp.buf.format)
