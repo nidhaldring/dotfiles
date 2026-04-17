@@ -52,7 +52,6 @@ au TextYankPost * silent! lua vim.highlight.on_yank({higroup="Visual", timeout=2
 augroup END
 ]])
 
-
 vim.g.c_syntax_for_h = 1
 vim.opt.signcolumn = "yes:1" -- merge signs in 1 col
 vim.opt.numberwidth = 2 -- max width for numbers in number col

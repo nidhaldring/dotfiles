@@ -2,8 +2,8 @@ local map = require("mappings.utils").map
 
 -- folding
 map("n", "zR", function()
-  require("ufo").openAllFolds()
+	require("ufo").openAllFolds()
 end)
 map("n", "zM", function()
-  require("ufo").closeAllFolds()
+	require("ufo").closeAllFolds()
 end)
