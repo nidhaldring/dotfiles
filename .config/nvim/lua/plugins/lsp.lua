@@ -1,7 +1,6 @@
 return {
   {
     "neovim/nvim-lspconfig",
-    -- opts = {}
   },
   {
     "williamboman/mason.nvim",
@@ -9,7 +8,30 @@ return {
   },
   {
     "williamboman/mason-lspconfig.nvim",
-    opts = {},
+    opts = {
+      ensure_installed = {
+        "ts_ls",
+        "vue_ls",
+        "jsonls",
+        "docker_language_server",
+        "gopls",
+        "clangd",
+        "typos_lsp"
+      }
+    },
+  },
+  {
+    'WhoIsSethDaniel/mason-tool-installer.nvim',
+    requires = {
+      'williamboman/mason.nvim',
+    },
+    config = function()
+      require('mason-tool-installer').setup({
+        ensure_installed = {
+          'prettierd',
+        },
+      })
+    end,
   },
   {
     "hrsh7th/nvim-cmp",
