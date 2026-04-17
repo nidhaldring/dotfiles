@@ -6,8 +6,9 @@ return {
   config = function()
     local configs = require("nvim-treesitter.configs")
     configs.setup({
-      ensure_installed = { "c", "lua", "javascript", "typescript", "go", "rust", "vue", "markdown" },
       highlight = {
+        ensure_installed = { "c", "lua", "javascript", "typescript", "go", "rust", "vue", "markdown", "html",
+          "latex", "yaml" },
         enable = true,
         disable = function(_, bufnr)
           return vim.api.nvim_buf_line_count(bufnr) > 50000
