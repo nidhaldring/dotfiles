@@ -13,10 +13,12 @@ return {
 			"rust",
 			"vue",
 			"html",
+      "css",
 			"yaml",
 			"json",
 			"markdown",
-      "markdown_inline"
+      "markdown_inline",
+      "tsx"
 		})
 
 		vim.api.nvim_create_autocmd("FileType", {

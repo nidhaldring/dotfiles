@@ -17,6 +17,7 @@ return {
 				"gopls",
 				"clangd",
 				"typos_lsp",
+        "tailwindcss",
 			},
 		},
 	},
