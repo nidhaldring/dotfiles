@@ -4,6 +4,25 @@
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
+export PATH=$PATH:/usr/local/go/bin
+export PATH="$HOME/.local/bin:$PATH"
+
+
+
+# Set personal aliases, overriding those provided by oh-my-zsh libs,
+# plugins, and themes. Aliases can be placed here, though oh-my-zsh
+# users are encouraged to define aliases within the ZSH_CUSTOM folder.
+# For a full list of active aliases, run `alias`.
+#
+# Example aliases
+# alias zshconfig="mate ~/.zshrc"
+# alias ohmyzsh="mate ~/.oh-my-zsh"
+alias vim="nvim"
+alias v="nvim"
+alias :q="exit"
+alias stremio="flatpak run com.stremio.Stremio &"
+export EDITOR='nvim'
+
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
@@ -92,19 +111,6 @@ source $ZSH/oh-my-zsh.sh
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-alias vim="nvim"
-alias v="nvim"
-alias :q="exit"
-alias stremio="flatpak run com.stremio.Stremio &"
-export EDITOR='nvim'
 
 
 # Configure zsh-vi-mode
@@ -113,23 +119,15 @@ ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
 
 fpath+=${ZDOTDIR:-~}/.zsh_functions
 
-export PATH=$PATH:/usr/local/go/bin
-
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-function my_super_duper_fzf_thingy() {
-  fzf_output=$({ fdfind .  ~/Desktop/personal ~/Desktop/perla ~/Desktop/alwasaet ~/.config/nvim ~/.config/i3; echo ~/.zshrc } | fzf)
-  [[ -z $fzf_output ]] || vim $fzf_output
-}
-zle -N my_super_duper_fzf_thingy{,}
 
-# Define an init function and append to zvm_after_init_commands
-function my_init() {
-  [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-  bindkey '^e' my_super_duper_fzf_thingy
-}
-zvm_after_init_commands+=(my_init)
 
+zvm_after_init() {
+  # I need to put this here because zsh-vi-mode seems to override CTRL+R binding
+  # Set up fzf key bindings and fuzzy completion
+  source <(fzf --zsh)
+}
