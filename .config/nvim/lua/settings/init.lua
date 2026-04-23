@@ -60,4 +60,7 @@ vim.opt.numberwidth = 2 -- max width for numbers in number col
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
+-- enable arabic support
+vim.opt.termbidi = true
+
 require("settings.lsp")
