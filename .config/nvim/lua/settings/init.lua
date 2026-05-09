@@ -63,4 +63,7 @@ vim.g.loaded_netrwPlugin = 1
 -- enable arabic support
 vim.opt.termbidi = true
 
+-- this fixes fast scrolling wezterm
+vim.o.mousescroll = "ver:1,hor:6"
+
 require("settings.lsp")
